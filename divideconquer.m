@@ -27,7 +27,16 @@ function[Sigmaout] = divideconquer(Y,g,k,BURNIN,MCMC,thin,rho)
 
 
 tic;
-[n,p] = size(Y); 
+[n,p] = size(Y);
+nnzcol = zeros(p,1); 
+for j = 1:p
+    nnzcol(j) = nnz(Y(:,j)); %non zero entries in each column
+end
+
+zerocol = find(~nnzcol); %zero columns
+
+Y = Y(:,setdiff(1:p,zerocol)); %remove the zero columns
+
 P = p/g; K = k/g;
 Sigmaout = zeros(p,p); 
 

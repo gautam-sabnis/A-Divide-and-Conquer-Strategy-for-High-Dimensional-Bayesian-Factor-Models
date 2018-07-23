@@ -36,6 +36,7 @@ end
 zerocol = find(~nnzcol); %zero columns
 
 Y = Y(:,setdiff(1:p,zerocol)); %remove the zero columns
+p = p - length(zerocol); 
 
 P = p/g; K = k/g;
 Sigmaout = zeros(p,p); 
